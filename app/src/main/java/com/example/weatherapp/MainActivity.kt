@@ -69,6 +69,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getLocationWeatherDetails(){
+        if(Constants.isNetworkAvailable(this)){
+            Toast.makeText(this@MainActivity,"You have connected to the internet.",
+                Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(this@MainActivity,"No internet connection available.",
+                Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showRationalDialogForPermission(){
         AlertDialog.Builder(this)
             .setMessage("it looks like you have turned off permissions required for this feature. " +
@@ -114,11 +125,12 @@ class MainActivity : AppCompatActivity() {
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val mLastLocation: Location = locationResult.lastLocation
-            val mLatitude = mLastLocation.latitude
-            Log.e("Current Latitude", "$mLatitude")
-            val mLongitude = mLastLocation.longitude
-            Log.e("Current Longitude", "$mLongitude")
+            val latitude = mLastLocation.latitude
+            Log.e("Current Latitude", "$latitude")
+            val longitude = mLastLocation.longitude
+            Log.e("Current Longitude", "$longitude")
 
+            getLocationWeatherDetails()
         }
     }
 }
