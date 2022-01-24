@@ -9,12 +9,14 @@ import android.content.Intent
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.models.WeatherResponse
@@ -97,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             showCustomProgressDialog()
 
             listCall.enqueue(object: Callback<WeatherResponse>{
+                @RequiresApi(Build.VERSION_CODES.N)
                 override fun onResponse(
                     call: Call<WeatherResponse>,
                     response: Response<WeatherResponse>
@@ -204,6 +207,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SetTextI18n")
     private fun setupUI(weatherList: WeatherResponse) {
 
         for (z in weatherList.weather.indices) {
@@ -219,8 +224,8 @@ class MainActivity : AppCompatActivity() {
             binding?.tvSpeed?.text = weatherList.wind.speed.toString()
             binding?.tvName?.text = weatherList.name
             binding?.tvCountry?.text = weatherList.sys.country
-            binding?.tvSunriseTime?.text = unixTime(weatherList.sys.sunrise.toLong())
-            binding?.tvSunsetTime?.text = unixTime(weatherList.sys.sunset.toLong())
+            binding?.tvSunriseTime?.text = unixTime(weatherList.sys.sunrise)
+            binding?.tvSunsetTime?.text = unixTime(weatherList.sys.sunset)
 
         }
     }
