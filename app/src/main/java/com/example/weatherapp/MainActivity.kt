@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -32,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
+    private var mProgressDialog:Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,12 +88,17 @@ class MainActivity : AppCompatActivity() {
 
             val listCall: Call<WeatherResponse> = service.getWeather(latitude,longitude,Constants.METRIC_UNIT,Constants.APP_ID)
 
+            showCustomProgressDialog()
+
             listCall.enqueue(object: Callback<WeatherResponse>{
                 override fun onResponse(
                     call: Call<WeatherResponse>,
                     response: Response<WeatherResponse>
                 ) {
                     if(response.isSuccessful){
+
+                        hideProgressDialog()
+
                         val weatherList: WeatherResponse? = response.body()
                         Log.i("Response Result","$weatherList")
                     }
@@ -99,19 +106,20 @@ class MainActivity : AppCompatActivity() {
                         val rc = response.code()
                         when(rc){
                             400->{
-                                Log.i("Error 400","Bad Connection")
+                                Log.e("Error 400","Bad Connection")
                             }
                             400->{
-                                Log.i("Error 404","Not Found")
+                                Log.e("Error 404","Not Found")
                             }
                             else->{
-                                Log.i("Error","Generic Error")
+                                Log.e("Error","Generic Error")
                             }
                         }
                     }
                 }
                 override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                    Log.i("Errorrrrrr",t.message.toString())
+                    Log.e("Errorrrrrr",t.message.toString())
+                    hideProgressDialog()
                 }
             })
         }
@@ -172,6 +180,20 @@ class MainActivity : AppCompatActivity() {
             Log.e("Current Longitude", "$longitude")
 
             getLocationWeatherDetails(latitude, longitude)
+        }
+    }
+
+    private fun showCustomProgressDialog(){
+        mProgressDialog = Dialog(this)
+
+        mProgressDialog!!.setContentView(R.layout.dialog_custom_progress)
+
+        mProgressDialog!!.show()
+    }
+
+    private fun hideProgressDialog(){
+        if(mProgressDialog != null){
+            mProgressDialog!!.dismiss()
         }
     }
 }
