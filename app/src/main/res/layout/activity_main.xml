@@ -52,7 +52,7 @@
                         android:textColor="@color/primary_text_color"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
-                        tools:text="Weather" />
+                        android:text="Weather" />
 
                     <TextView
                         android:id="@+id/tv_main_description"
@@ -61,7 +61,7 @@
                         android:gravity="end"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="condition" />
+                        android:text="condition" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -104,7 +104,7 @@
                         android:textColor="@color/primary_text_color"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
-                        tools:text="Degree" />
+                        android:text="Degree" />
 
                     <TextView
                         android:id="@+id/tv_humidity"
@@ -113,7 +113,7 @@
                         android:gravity="end"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="per cent" />
+                        android:text="per cent" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -164,7 +164,7 @@
                         android:textColor="@color/primary_text_color"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
-                        tools:text="Minimum" />
+                        android:text="Minimum" />
 
                     <TextView
                         android:id="@+id/tv_max"
@@ -173,7 +173,7 @@
                         android:gravity="end"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="Maximum" />
+                        android:text="Maximum" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -216,7 +216,7 @@
                         android:textColor="@color/primary_text_color"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
-                        tools:text="Wind" />
+                        android:text="Wind" />
 
                     <TextView
                         android:id="@+id/tv_speed_unit"
@@ -274,7 +274,7 @@
                         android:textColor="@color/primary_text_color"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
-                        tools:text="Name" />
+                        android:text="Name" />
 
                     <TextView
                         android:id="@+id/tv_country"
@@ -283,7 +283,7 @@
                         android:gravity="end"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="Country" />
+                        android:text="Country" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -320,7 +320,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="Sunrise" />
+                        android:text="Sunrise" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -343,7 +343,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/secondary_text_color"
                         android:textSize="@dimen/value_text_size"
-                        tools:text="Sunset" />
+                        android:text="Sunset" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

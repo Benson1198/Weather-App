@@ -15,6 +15,8 @@ import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -189,6 +191,9 @@ class MainActivity : AppCompatActivity() {
             val longitude = mLastLocation.longitude
             Log.e("Current Longitude", "$longitude")
 
+            binding.tvMin.text = latitude.toString()
+            binding.tvMax.text = longitude.toString()
+
             getLocationWeatherDetails(latitude, longitude)
         }
     }
@@ -204,6 +209,21 @@ class MainActivity : AppCompatActivity() {
     private fun hideProgressDialog(){
         if(mProgressDialog != null){
             mProgressDialog!!.dismiss()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_refresh -> {
+                requestLocationData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
